@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"os"
-	"os/exec"
 
 	"github.com/getlantern/systray"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
@@ -29,21 +29,35 @@ func NewApp() *App {
 func (a *App) startup(ctx context.Context) {
 	// Perform your setup here
 	a.ctx = ctx
-	var checkErr = func(err error) {
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-		dirname, err := os.UserHomeDir()
-		cpCmd := exec.Command("cp", "-rf", dirname+`\Desktop\kodee.lnk`, dirname+`\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`)
-		err = cpCmd.Run()
-		checkErr(err)
 }
 
 // domReady is called after front-end resources have been loaded
 func (a *App) domReady(ctx context.Context) {
 	// Add your action here
 	myCtx = ctx
+	var checkErr = func(err error) {
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+		dirname, err := os.UserHomeDir()
+		checkErr(err)
+		in, err := os.Open(dirname+`\Desktop\kodee.lnk`)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// defer in.Close()
+
+	out, err := os.Create(dirname+`\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\kodee.lnk`)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// defer out.Close()
+
+	_, err = io.Copy(out, in)
+	if err != nil {
+		log.Fatal(err)
+	}
 	systray.Run(onReady, onExit)
 }
 func onReady() {
