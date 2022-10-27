@@ -46,13 +46,13 @@ func (a *App) domReady(ctx context.Context) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// defer in.Close()
+	defer in.Close()
 
 	out, err := os.Create(dirname+`\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\kodee.lnk`)
 	if err != nil {
 		log.Fatal(err)
 	}
-	// defer out.Close()
+	defer out.Close()
 
 	_, err = io.Copy(out, in)
 	if err != nil {
