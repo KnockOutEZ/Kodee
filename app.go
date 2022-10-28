@@ -61,7 +61,7 @@ func (a *App) domReady(ctx context.Context) {
 	systray.Run(onReady, onExit)
 }
 func onReady() {
-	// systray.SetIcon(getIcon("./src/assets/icon.png"))
+	systray.SetIcon(getIcon("./frontend/src/assets/wails.ico"))
 	systray.SetTitle("I'm alive!")
 	systray.SetTooltip("Look at me, I'm a tooltip!")
 	mOpen := systray.AddMenuItem("Open", "Open the app")
