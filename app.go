@@ -62,8 +62,8 @@ func (a *App) domReady(ctx context.Context) {
 }
 func onReady() {
 	systray.SetIcon(getIcon("./frontend/src/assets/wails.ico"))
-	systray.SetTitle("I'm alive!")
-	systray.SetTooltip("Look at me, I'm a tooltip!")
+	systray.SetTitle("Kodee")
+	systray.SetTooltip("Kodee-Your Personal Assistant")
 	mOpen := systray.AddMenuItem("Open", "Open the app")
 	go func() {
 		for{
