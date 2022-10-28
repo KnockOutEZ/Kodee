@@ -65,8 +65,9 @@ function Todo() {
 
   const addItem = () => {
     if (!text) return;
+    let  all
     setState((prev) => {
-      return {
+       all = {
         ...prev,
         todo: {
           title: 'Todo',
@@ -79,11 +80,12 @@ function Todo() {
           ],
         },
       };
+      localStorage.setItem('todo', JSON.stringify(all));
+      return all;
     });
 
     setText('');
     setInputState([true, '']);
-    localStorage.setItem('todo', JSON.stringify(state));
   };
 
   const deleteItem = (id, droppableId) => {
@@ -92,20 +94,18 @@ function Todo() {
       prev[droppableId].items = prev[droppableId].items.filter(
         (item) => item.id !== id
       );
-
+    localStorage.setItem('todo', JSON.stringify(prev));
       return prev;
     });
-    localStorage.setItem('todo', JSON.stringify(state));
   };
 
   const clearCompleted = () => {
     setState((prev) => {
       prev = { ...prev };
       prev.done.items = [];
-
+      localStorage.setItem('todo', JSON.stringify(prev));
       return prev;
     });
-    localStorage.setItem('todo', JSON.stringify(state));
   };
 
   const editItem = (id, droppableId, value) => {
@@ -118,10 +118,9 @@ function Todo() {
 
         return item;
       });
-
+      localStorage.setItem('todo', JSON.stringify(prev));
       return prev;
     });
-    localStorage.setItem('todo', JSON.stringify(state));
   };
 
   return (
