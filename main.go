@@ -20,7 +20,7 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:            "KODEE",
+		Title:            "Kodee-Your Personal Assistant",
 		Width:            1024,
 		Height:           728,
 		Assets:           assets,
