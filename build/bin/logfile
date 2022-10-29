@@ -1,6 +1,0 @@
-ERROR systray: systray_windows.go:845 Unable to set icon: The volume for a file has been externally altered so that the opened file is no longer valid. [error=Unable to set icon: %v error_location=github.com/getlantern/systray.SetIcon (systray_windows.go:845) error_op= error_text=Unable to set icon: The volume for a file has been externally altered so that the opened file is no longer valid. error_type=errors.Error]
-ERROR systray: systray_windows.go:845   at github.com/getlantern/systray.SetIcon (systray_windows.go:845)
-ERROR systray: systray_windows.go:845   at main.onReady (app.go:64)
-ERROR systray: systray_windows.go:845   at github.com/getlantern/systray.Register.func2 (systray.go:94)
-ERROR systray: systray_windows.go:845   at runtime.goexit (asm_amd64.s:1571)
-ERROR systray: systray_windows.go:845 Caused by: The volume for a file has been externally altered so that the opened file is no longer valid.
