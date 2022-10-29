@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	_ "embed"
 
 	"github.com/getlantern/systray"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
@@ -14,6 +15,9 @@ import (
 )
 
 var myCtx context.Context
+
+//go:embed frontend/src/assets/wails.ico
+var logoICO []byte
 
 // App struct
 type App struct {
@@ -61,7 +65,7 @@ func (a *App) domReady(ctx context.Context) {
 	systray.Run(onReady, onExit)
 }
 func onReady() {
-	systray.SetIcon(getIcon("./frontend/src/assets/wails.ico"))
+	systray.SetIcon(logoICO)
 	systray.SetTitle("Kodee")
 	systray.SetTooltip("Kodee-Your Personal Assistant")
 	mOpen := systray.AddMenuItem("Open", "Open the app")
