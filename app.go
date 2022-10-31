@@ -13,6 +13,8 @@ import (
 	"github.com/getlantern/systray"
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/mem"
+	"github.com/showwin/speedtest-go/speedtest"
+	"github.com/kaimu/speedtest/providers/netflix"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 	"gopkg.in/toast.v1"
 )
@@ -143,21 +145,17 @@ func (a *App) GetCpuUsage() string{
 
 
 //ram usage
-func (a *App) GetRamUsage() string{
-	//Implement the function to fetch ram usage - Total Ram used , free ram available and used percentage
+func (a *App) GetRamUsage() []string{
 	m, err := mem.VirtualMemory()
 	if err != nil {
-		return err.Error()
+		return []string{err.Error()}
 	}
 	usedMessage := fmt.Sprintf(
 		"%s (%.2f%%)",
 		getReadableSize(m.Used),
 		m.UsedPercent,
 	)
-	// return("Ram Total: ", getReadableSize(m.Total))
-	return(usedMessage)
-	// return("Ram Available: ", getReadableSize(m.Available))
-	// return("Ram Free: ", getReadableSize(m.Free))
+	return []string{usedMessage, getReadableSize(m.Total),getReadableSize(m.Available),getReadableSize(m.Free)}
 }
 func getReadableSize(sizeInBytes uint64) (readableSizeString string) {
 	var (
@@ -170,4 +168,22 @@ func getReadableSize(sizeInBytes uint64) (readableSizeString string) {
 	}
 	readableSizeString = fmt.Sprintf("%.2f %s", size, units[i])
 	return
+}
+
+func (a *App) GetBandwithSpeed() []interface{}{
+	user, _ := speedtest.FetchUserInfo()
+
+	serverList, _ := speedtest.FetchServers(user)
+	targets, _ := serverList.FindServer([]int{})
+
+	netflixServer,_ := netflix.Fetch()
+	for _, s := range targets {
+		s.PingTest()
+		s.DownloadTest(false)
+		s.UploadTest(false)
+
+	return []interface{}{s.Latency, s.DLSpeed, s.ULSpeed,netflixServer}
+	}
+
+	return nil
 }

@@ -2,9 +2,16 @@ module changeme
 
 go 1.18
 
-require github.com/wailsapp/wails/v2 v2.1.0
+require (
+	github.com/kaimu/speedtest v0.0.0-20220111074741-408ab75d3ca1
+	github.com/showwin/speedtest-go v1.1.5
+	github.com/wailsapp/wails/v2 v2.1.0
+)
 
 require (
+	github.com/ddo/go-fast v0.0.0-20190807090025-2ab4a3dd618c // indirect
+	github.com/ddo/pick-json v0.0.0-20170207095303-c8760e09e0fe // indirect
+	github.com/ddo/rq v0.0.0-20190828174524-b3daa55fcaba // indirect
 	github.com/getlantern/context v0.0.0-20190109183933-c447772a6520 // indirect
 	github.com/getlantern/errors v0.0.0-20190325191628-abdb3e3e36f7 // indirect
 	github.com/getlantern/golog v0.0.0-20190830074920-4ef2e798c2d7 // indirect
@@ -18,6 +25,9 @@ require (
 	github.com/tklauser/go-sysconf v0.3.10 // indirect
 	github.com/tklauser/numcpus v0.4.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
+	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
+	gopkg.in/ddo/go-dlog.v2 v2.1.0 // indirect
+	gopkg.in/ddo/pick.v1 v1.2.2 // indirect
 )
 
 require (
