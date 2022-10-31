@@ -2,14 +2,17 @@ package main
 
 import (
 	"context"
+	_ "embed"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
 	"os"
-	_ "embed"
+	"time"
 
 	"github.com/getlantern/systray"
+	"github.com/shirou/gopsutil/cpu"
+	"github.com/shirou/gopsutil/mem"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 	"gopkg.in/toast.v1"
 )
@@ -126,4 +129,45 @@ func (a *App) Notification(title,message string) {
     if err != nil {
         log.Fatalln(err)
     }
+}
+
+//cpu usage
+func (a *App) GetCpuUsage() string{
+	cpuPercent, err := cpu.Percent(time.Second, false)
+	if err != nil {
+		return err.Error()
+	}
+	usedPercent := fmt.Sprintf("%.2f", cpuPercent[0])
+	return usedPercent + "%"
+}
+
+
+//ram usage
+func (a *App) GetRamUsage() string{
+	//Implement the function to fetch ram usage - Total Ram used , free ram available and used percentage
+	m, err := mem.VirtualMemory()
+	if err != nil {
+		return err.Error()
+	}
+	usedMessage := fmt.Sprintf(
+		"%s (%.2f%%)",
+		getReadableSize(m.Used),
+		m.UsedPercent,
+	)
+	// return("Ram Total: ", getReadableSize(m.Total))
+	return(usedMessage)
+	// return("Ram Available: ", getReadableSize(m.Available))
+	// return("Ram Free: ", getReadableSize(m.Free))
+}
+func getReadableSize(sizeInBytes uint64) (readableSizeString string) {
+	var (
+		units = []string{"B", "KB", "MB", "GB", "TB", "PB"}
+		size  = float64(sizeInBytes)
+		i     = 0
+	)
+	for ; i < len(units) && size >= 1024; i++ {
+		size = size / 1024
+	}
+	readableSizeString = fmt.Sprintf("%.2f %s", size, units[i])
+	return
 }

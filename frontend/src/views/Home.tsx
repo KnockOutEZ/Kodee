@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 // import icon from '../../../assets/icon.svg';
 import '../../wailsjs/go/main/App'
-import { Greet, Notification } from '../../wailsjs/go/main/App';
+import { Greet, Notification,GetCpuUsage,GetRamUsage } from '../../wailsjs/go/main/App';
 import '../styles/home.css'
 
 const Home = () => {
@@ -35,7 +35,7 @@ const Home = () => {
                 Read our docs
               </button>
             </a>
-              <button className='button' type="button">
+              <button className='button' type="button" onClick={()=>console.log(GetCpuUsage(),GetRamUsage())}>
                 <span role="img" aria-label="folded hands">
                   🙏
                 </span>
