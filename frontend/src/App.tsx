@@ -1,18 +1,14 @@
 import './App.css'
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './views/Home';
-import Todo from './views/Todo';
+import { MemoryRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Auth from './layouts/auth';
+import Dashboard from './layouts/dashboard';
 function App() {
-// const Todo = require('./views/Todo');
     return (
-        <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/todo" element={<Todo/>} />
-        </Routes>
-      </Router>
-    </>
+      <Routes>
+      <Route path="/dashboard/*" element={<Dashboard />} />
+      <Route path="/auth/*" element={<Auth />} />
+      <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
+    </Routes>
     )
 }
 
