@@ -44,34 +44,32 @@ func (a *App) startup(ctx context.Context) {
 func (a *App) domReady(ctx context.Context) {
 	// Add your action here
 	myCtx = ctx
-	systray.Run(onReady, onExit)
-	setStartupFunc()
-}
-func setStartupFunc(){
 	var checkErr = func(err error) {
-		if err != nil {
-			return
-		}
+		// if err != nil {
+		// 	return
+		// }
 	}
 		dirname, err := os.UserHomeDir()
 		checkErr(err)
 		in, err := os.Open(dirname+`\Desktop\kodee.lnk`)
-	if err != nil {
-		return
-	}
+	// if err != nil {
+	// 	return
+	// }
 	defer in.Close()
 
 	out, err := os.Create(dirname+`\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\kodee.lnk`)
-	if err != nil {
-		return
-	}
+	// if err != nil {
+	// 	return
+	// }
 	defer out.Close()
 
 	_, err = io.Copy(out, in)
-	if err != nil {
-		return
-	}
+	// if err != nil {
+	// 	return
+	// }
+	systray.Run(onReady, onExit)
 }
+
 func onReady() {
 	systray.SetIcon(logoICO)
 	systray.SetTitle("Kodee")
