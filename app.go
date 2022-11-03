@@ -6,15 +6,14 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"os"
 	"time"
 
 	"github.com/getlantern/systray"
+	"github.com/kaimu/speedtest/providers/netflix"
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/mem"
 	"github.com/showwin/speedtest-go/speedtest"
-	"github.com/kaimu/speedtest/providers/netflix"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 	"gopkg.in/toast.v1"
 )
@@ -44,30 +43,23 @@ func (a *App) startup(ctx context.Context) {
 func (a *App) domReady(ctx context.Context) {
 	// Add your action here
 	myCtx = ctx
-	var checkErr = func(err error) {
-		// if err != nil {
-		// 	return
-		// }
-	}
+	copyIconInStartup()
+	systray.Run(onReady, onExit)
+}
+
+func copyIconInStartup(){
 		dirname, err := os.UserHomeDir()
 		checkErr(err)
 		in, err := os.Open(dirname+`\Desktop\kodee.lnk`)
-	// if err != nil {
-	// 	return
-	// }
+		checkErr(err)
 	defer in.Close()
 
 	out, err := os.Create(dirname+`\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\kodee.lnk`)
-	// if err != nil {
-	// 	return
-	// }
+	checkErr(err)
 	defer out.Close()
 
 	_, err = io.Copy(out, in)
-	// if err != nil {
-	// 	return
-	// }
-	systray.Run(onReady, onExit)
+	checkErr(err)
 }
 
 func onReady() {
@@ -96,9 +88,7 @@ func onExit() {
 
 func getIcon(s string) []byte {
 	b, err := ioutil.ReadFile(s)
-	if err != nil {
-		fmt.Print(err)
-	}
+	checkErr(err)
 	return b
 }
 
@@ -121,25 +111,25 @@ func (a *App) Greet(name string) string {
 
 // Meet returns a greeting for the given name
 func (a *App) Notification(title,message string) {
+	notificationFunc(title,message)
+}
+func notificationFunc(title,message string){
 	notification := toast.Notification{
 		AppID:               "Kodee",
 		Title:               title,
 		Message:             message,
-		// Icon:                "",
+		// Icon:                "frontend/src/assets/wails.ico",
 		// Actions:             []toast.Action{{"protocol", "I'm a button", "https://www.google.com/search?q=qwe"}, {"protocol", "Me too!", ""}},
 	}
     err := notification.Push()
-    if err != nil {
-        log.Fatalln(err)
-    }
+    checkErr(err)
+	return
 }
 
 //cpu usage
 func (a *App) GetCpuUsage() string{
 	cpuPercent, err := cpu.Percent(time.Second, false)
-	if err != nil {
-		return err.Error()
-	}
+	checkErr(err)
 	usedPercent := fmt.Sprintf("%.2f", cpuPercent[0])
 	return usedPercent + "%"
 }
@@ -148,9 +138,7 @@ func (a *App) GetCpuUsage() string{
 //ram usage
 func (a *App) GetRamUsage() []string{
 	m, err := mem.VirtualMemory()
-	if err != nil {
-		return []string{err.Error()}
-	}
+	checkErr(err)
 	usedMessage := fmt.Sprintf(
 		"%s (%.2f%%)",
 		getReadableSize(m.Used),
@@ -187,4 +175,11 @@ func (a *App) GetBandwithSpeed() []interface{}{
 	}
 
 	return nil
+}
+
+func checkErr(err error) {
+	if err != nil {
+		notificationFunc("Error",err.Error())
+	}
+	return
 }
