@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"os"
 	"time"
 
@@ -179,7 +180,8 @@ func (a *App) GetBandwithSpeed() []interface{}{
 
 func checkErr(err error) {
 	if err != nil {
-		notificationFunc("Error",err.Error())
+		// notificationFunc("Error",err.Error())
+		log.Fatal(err.error())
 	}
 	return
 }

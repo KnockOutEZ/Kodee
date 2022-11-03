@@ -15,7 +15,7 @@
 
 .droppable-col {
     width: 100%;
-    background-color: #3f3e3e;
+    background-color: #00000011;
     padding: 10px 10px 0 10px;
     border-radius: 7px;
     display: flex;
@@ -23,9 +23,10 @@
 }
 
 .item {
+  border: 2px solid #dadada;
     margin-bottom: 10px;
-    background-color: rgb(37, 37, 37);
-    color: white;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     padding: 5px;
     border-radius: 7px;
     display: flex;
@@ -33,7 +34,9 @@
 }
 
 .item.dragging {
-    background-color: #FB2077;
+    border-radius: 7px;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
 }
 
 .button {
@@ -71,10 +74,10 @@
 	line-height: 18px;
 	height: 18px;
 	padding: 10px;
-	border: 1px solid rgb(71, 71, 71);
-	background: rgb(56, 56, 56);
+	border: 1px solid #9ecaed;
+	background: #FBFCFC;
 	border-radius: 6px;
-	color: rgb(224, 224, 224);
+	color: rgb(0, 0, 0);
     width: 88%;
     text-align: left;
     height: 100%;
@@ -92,7 +95,7 @@
     padding: 10px;
     height: 40px;
     min-width: 10%;
-    color: white;
+    color: #3197ED;
     overflow: hidden;
   }
 
@@ -101,10 +104,10 @@
 	font-size: 18px;
 	line-height: 18px;
 	padding: 10px;
-	border: 1px solid rgb(71, 71, 71);
-	background: rgb(56, 56, 56);
+	border: 1px solid #9ecaed;
+	background: #FBFCFC;
 	border-radius: 6px;
-	color: rgb(224, 224, 224);
+	color: rgb(0, 0, 0);
     width: 50%;
     text-align: left;
     height: 40px;
