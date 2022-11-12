@@ -172,7 +172,7 @@ func (a *App) GetBandwithSpeed() []interface{}{
 		s.DownloadTest(false)
 		s.UploadTest(false)
 
-	return []interface{}{s.Latency, s.DLSpeed, s.ULSpeed,netflixServer}
+	return []interface{}{netflixServer} //s.Latency, s.DLSpeed, s.ULSpeed,
 	}
 
 	return nil

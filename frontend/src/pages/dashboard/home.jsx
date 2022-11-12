@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {
   Typography,
   Card,
@@ -27,8 +27,18 @@ import {
   projectsTableData,
   ordersOverviewData,
 } from "../../data";
+import { Greet, Notification,GetCpuUsage,GetRamUsage,GetBandwithSpeed } from '../../../wailsjs/go/main/App';
+
 
 export function Home() {
+  useEffect(() => {
+    setInterval(async() => {
+      console.log(await GetCpuUsage())
+    console.log(await GetRamUsage())
+    console.log(await GetBandwithSpeed())
+      }, 5000);
+    
+  }, [])
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
