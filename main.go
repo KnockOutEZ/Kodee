@@ -31,6 +31,7 @@ func main() {
 		OnBeforeClose:     app.beforeClose,
 		OnDomReady:        app.domReady,
 		HideWindowOnClose: true,
+		WindowStartState:   options.Maximised,
 		Bind: []interface{}{
 			app,
 		},
