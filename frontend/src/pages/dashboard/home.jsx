@@ -36,6 +36,7 @@ export function Home() {
       console.log(await GetCpuUsage())
     console.log(await GetRamUsage())
     console.log(await GetBandwithSpeed())
+    console.log(Notification("qwe","nig"))
       }, 5000);
     
   }, [])
