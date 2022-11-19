@@ -8,6 +8,7 @@ import (
 
 	"github.com/KnockOutEZ/Kodee/backend/systemUsage"
 	"github.com/KnockOutEZ/Kodee/backend/utils"
+	"github.com/KnockOutEZ/Kodee/backend/auth"
 	"github.com/getlantern/systray"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -107,4 +108,9 @@ func (a *App) GetRamUsage() []string{
 
 func (a *App) GetBandwithSpeed() []interface{}{
 	return systemUsage.GetBandwithSpeed()
+}
+
+// Greet returns a greeting for the given name
+func (a *App) Auth() {
+	auth.HandlePage()
 }

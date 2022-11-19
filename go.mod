@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/kaimu/speedtest v0.0.0-20220111074741-408ab75d3ca1
 	github.com/showwin/speedtest-go v1.2.1
-	github.com/wailsapp/wails/v2 v2.1.0
+	github.com/wailsapp/wails/v2 v2.2.0
 )
 
 require (
@@ -24,6 +24,7 @@ require (
 	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d // indirect
 	github.com/oxtoacart/bpool v0.0.0-20190530202638-03653db5a59c // indirect
 	github.com/rivo/uniseg v0.4.3 // indirect
+	github.com/samber/lo v1.27.1 // indirect
 	github.com/stretchr/testify v1.8.1 // indirect
 	github.com/tklauser/go-sysconf v0.3.11 // indirect
 	github.com/tklauser/numcpus v0.6.0 // indirect
@@ -33,6 +34,7 @@ require (
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	go.uber.org/zap v1.23.0 // indirect
+	golang.org/x/exp v0.0.0-20220303212507-bbda1eaf7a17 // indirect
 	golang.org/x/sync v0.1.0 // indirect
 	gopkg.in/ddo/go-dlog.v2 v2.1.0 // indirect
 	gopkg.in/ddo/pick.v1 v1.2.2 // indirect
